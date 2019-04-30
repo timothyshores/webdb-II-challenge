@@ -41,10 +41,14 @@ Return the `id` of the inserted zoo and a 201 status code.
 
 ```
 router.post('/', (req, res) => {
-    db('zoos')
-        .insert(req.body, 'id')
-        .then(results => res.status(200).json(results))
-        .catch(err => res.status(500).json(err));
+    const message201 = { message: 'req.body.name is empty and requires a valid string' }
+
+    req.body.name
+        ? db('zoos')
+            .insert(req.body, 'id')
+            .then(results => res.status(200).json(results))
+            .catch(err => res.status(500).json(err))
+        : res.status(201).json(message201)
 });
 ```
 

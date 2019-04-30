@@ -32,10 +32,14 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    db('zoos')
-        .insert(req.body, 'id')
-        .then(results => res.status(200).json(results))
-        .catch(err => res.status(500).json(err));
+    const message201 = { message: 'req.body.name is empty and requires a valid string' }
+
+    req.body.name
+        ? db('zoos')
+            .insert(req.body, 'id')
+            .then(results => res.status(200).json(results))
+            .catch(err => res.status(500).json(err))
+        : res.status(201).json(message201)
 });
 
 router.delete('/:id', (req, res) => {
