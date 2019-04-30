@@ -12,8 +12,6 @@ server.use(helmet());
 server.use('/api/zoos', zoosRouter);
 server.use('/api/bears', bearsRouter);
 
-// endpoints here
-
 const port = 3300;
 server.listen(port, () => {
     console.log(`\n=== Web API Listening on http://localhost:${port} ===\n`);
