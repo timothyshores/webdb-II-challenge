@@ -32,9 +32,10 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const message201 = { message: 'req.body.name is empty and requires a valid string' }
+    const name = req.body.name;
+    const message201 = { message: 'req.body.name requires a valid string' }
 
-    req.body.name
+    name && (typeof name === 'string')
         ? db('zoos')
             .insert(req.body, 'id')
             .then(results => res.status(200).json(results))
