@@ -2,12 +2,15 @@ const express = require('express');
 const helmet = require('helmet');
 
 const zoosRouter = require('./routes/zoosRouter');
+const bearsRouter = require('./routes/bearsRouter');
+
 
 const server = express();
 server.use(express.json());
 server.use(helmet());
 
 server.use('/api/zoos', zoosRouter);
+server.use('/api/bears', bearsRouter);
 
 // endpoints here
 
