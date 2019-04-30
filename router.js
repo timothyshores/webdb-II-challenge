@@ -38,4 +38,22 @@ router.post('/', (req, res) => {
         .catch(err => res.status(500).json(err));
 });
 
+router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+    const message200 = { message: `Zoo id: ${id} was successfully deleted` }
+    const message404 = { message: `Zoo id: ${id} does not exist` }
+
+    db('zoos')
+        .where({ id: id })
+        .del()
+        .then(count => {
+            count > 0
+                ? res.status(200).json(message200)
+                : res.status(404).json(message404)
+        })
+        .catch(err => {
+            res.status(500).json(err);
+        });
+});
+
 module.exports = router;
