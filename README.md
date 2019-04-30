@@ -41,12 +41,13 @@ Return the `id` of the inserted zoo and a 201 status code.
 
 ```
 router.post('/', (req, res) => {
-    const message201 = { message: 'req.body.name is empty and requires a valid string' }
+    const name = req.body.name;
+    const message201 = { message: 'req.body.name requires a valid string' }
 
-    req.body.name
+    name && (typeof name === 'string')
         ? db('zoos')
             .insert(req.body, 'id')
-            .then(results => res.status(200).json(results))
+            .then(results => res.status(201).json(results))
             .catch(err => res.status(500).json(err))
         : res.status(201).json(message201)
 });
@@ -135,4 +136,4 @@ router.put('/:id', (req, res) => {
 
 ## Stretch Problem
 
-Add a new _bears_ table to the database and add endpoints to perform CRUD operations on it. Each bear should have an `id` and `name` property similar to the _zoos_ table.
+✅ Add a new _bears_ table to the database and add endpoints to perform CRUD operations on it. Each bear should have an `id` and `name` property similar to the _zoos_ table.

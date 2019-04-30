@@ -39,7 +39,7 @@ router.post('/', (req, res) => {
     name && (typeof name === 'string')
         ? db('bears')
             .insert(req.body, 'id')
-            .then(results => res.status(200).json(results))
+            .then(results => res.status(201).json(results))
             .catch(err => res.status(500).json(err))
         : res.status(201).json(message201)
 });
