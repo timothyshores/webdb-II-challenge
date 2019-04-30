@@ -16,4 +16,21 @@ router.get('/', (req, res) => {
         .catch(err => res.status(500).json(err));
 });
 
+router.get('/:id', (req, res) => {
+    const id = req.params.id;
+    const message404 = { message: `Zoo id: ${id}  not found` }
+
+    db('zoos')
+        .where({ id: id })
+        .first()
+        .then(zoo => {
+            zoo === undefined
+                ? res.status(404).json(message404)
+                : res.status(200).json(zoo)
+        })
+        .catch(err => res.status(500).json(err));
+});
+
+
+
 module.exports = router;
